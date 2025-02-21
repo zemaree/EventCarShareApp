@@ -62,39 +62,51 @@ def event_detail(event_id):
 def matches(event_id):
     event = Event.query.get_or_404(event_id)
 
-    # Reset previous matches
-    RideRequest.query.filter_by(event_id=event_id).update({RideRequest.matched_offer_id: None})
-    db.session.commit()
-
     # Get all offers and requests
     offers = RideOffer.query.filter_by(event_id=event_id).all()
     requests = RideRequest.query.filter_by(event_id=event_id).all()
 
-    # Shuffle requests for random matching
-    random.shuffle(requests)
-
-    # Match riders to drivers
+    # Track matches and waiting list
     matches = []
     waiting_list = []
 
+    # Process existing matches first
     for request in requests:
+        if request.matched_offer_id:
+            offer = next((o for o in offers if o.id == request.matched_offer_id), None)
+            if offer:
+                matches.append({
+                    'passenger': request.passenger_name,
+                    'driver': offer.driver_name
+                })
+                continue
+
+    # Match unmatched requests
+    unmatched_requests = [r for r in requests if not r.matched_offer_id]
+    random.shuffle(unmatched_requests)
+
+    for request in unmatched_requests:
         matched = False
         for offer in offers:
-            if offer.seats_available > 0:
+            # Count existing matches for this offer
+            existing_matches = len([r for r in requests if r.matched_offer_id == offer.id])
+            available_seats = offer.seats_available - existing_matches
+
+            if available_seats > 0:
                 request.matched_offer_id = offer.id
-                offer.seats_available -= 1
                 matches.append({
                     'passenger': request.passenger_name,
                     'driver': offer.driver_name
                 })
                 matched = True
                 break
+
         if not matched:
             waiting_list.append(request.passenger_name)
 
     db.session.commit()
 
-    return render_template('matches.html', 
-                         event=event, 
-                         matches=matches, 
+    return render_template('matches.html',
+                         event=event,
+                         matches=matches,
                          waiting_list=waiting_list)
