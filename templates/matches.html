@@ -8,7 +8,7 @@
         <h2>Associazioni per {{ event.title }}</h2>
         <p class="lead">
             <strong>Data:</strong> {{ event.date.strftime('%Y-%m-%d') }}<br>
-            <strong>Destinazione:</strong> {{ event.destination }}
+            <strong>Partenza:</strong> {{ event.destination }}
         </p>
     </div>
 </div>
@@ -26,8 +26,8 @@
                     <div class="list-group-item">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h6 class="mb-1">Passenger: {{ match.passenger }}</h6>
-                                <p class="mb-1">Driver: {{ match.driver }}</p>
+                                <h6 class="mb-1">Passeggero: {{ match.passenger }}</h6>
+                                <p class="mb-1">Autista: {{ match.driver }}</p>
                             </div>
                             <span class="badge bg-success">Matched</span>
                         </div>
@@ -44,7 +44,7 @@
     <div class="col-md-4">
         <div class="card mb-4">
             <div class="card-header">
-                <h5 class="card-title mb-0">Waiting List</h5>
+                <h5 class="card-title mb-0">Lista d'attesa</h5>
             </div>
             <div class="card-body">
                 {% if waiting_list %}

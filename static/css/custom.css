@@ -95,3 +95,8 @@ body {
         padding-right: 2rem;
     }
 }
+
+/* Header styles */
+header {
+    color: #ff6600; /* Cambia questo colore secondo le tue preferenze */
+}
