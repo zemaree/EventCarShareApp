@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-4">Welcome to EventCarShare 🚗</h1>
+    <p class="lead">Connect with others and share rides to events!</p>
+    
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Create Events</h5>
+                    <p class="card-text">Organize events and let others join your ride-sharing community.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Offer Rides</h5>
+                    <p class="card-text">Have empty seats? Offer a ride and help others attend events.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Find Rides</h5>
+                    <p class="card-text">Need a ride? Connect with drivers heading to the same event.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <a href="{{ url_for('events') }}" class="btn btn-lg btn-primary">Browse Events</a>
+    </div>
+</div>
+{% endblock %}

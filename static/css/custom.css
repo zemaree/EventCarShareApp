@@ -1,0 +1,37 @@
+/* Minimal custom styles to complement Bootstrap */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+}
+
+body {
+    margin-bottom: 60px;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 60px;
+}
+
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+/* Custom styles for the matches page */
+.badge {
+    font-size: 0.9em;
+    padding: 0.5em 0.7em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
