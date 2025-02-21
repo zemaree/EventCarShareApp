@@ -42,21 +42,69 @@ def event_detail(event_id):
     if request.method == 'POST':
         action = request.form.get('action')
 
-        if action == 'offer':
-            driver_name = request.form.get('driver_name')
-            seats = int(request.form.get('seats'))
-            offer = RideOffer(event_id=event_id, driver_name=driver_name, seats_available=seats)
-            db.session.add(offer)
+        try:
+            if action == 'offer':
+                driver_name = request.form.get('driver_name')
+                seats = int(request.form.get('seats'))
+                offer = RideOffer(event_id=event_id, driver_name=driver_name, seats_available=seats)
+                db.session.add(offer)
+                flash('Ride offer added successfully!', 'success')
 
-        elif action == 'request':
-            passenger_name = request.form.get('passenger_name')
-            request_ride = RideRequest(event_id=event_id, passenger_name=passenger_name)
-            db.session.add(request_ride)
+            elif action == 'request':
+                passenger_name = request.form.get('passenger_name')
+                request_ride = RideRequest(event_id=event_id, passenger_name=passenger_name)
+                db.session.add(request_ride)
+                flash('Ride request added successfully!', 'success')
 
-        db.session.commit()
-        flash('Your submission has been recorded!', 'success')
+            elif action == 'delete_offer':
+                offer_id = request.form.get('offer_id')
+                offer = RideOffer.query.get_or_404(offer_id)
+                if offer.event_id != event_id:
+                    flash('Invalid request', 'danger')
+                    return redirect(url_for('event_detail', event_id=event_id))
+
+                # Clear any matches for this offer
+                RideRequest.query.filter_by(matched_offer_id=offer.id).update({RideRequest.matched_offer_id: None})
+                db.session.delete(offer)
+                flash('Ride offer deleted successfully!', 'success')
+
+            elif action == 'delete_request':
+                request_id = request.form.get('request_id')
+                ride_request = RideRequest.query.get_or_404(request_id)
+                if ride_request.event_id != event_id:
+                    flash('Invalid request', 'danger')
+                    return redirect(url_for('event_detail', event_id=event_id))
+
+                db.session.delete(ride_request)
+                flash('Ride request deleted successfully!', 'success')
+
+            db.session.commit()
+
+        except Exception as e:
+            db.session.rollback()
+            app.logger.error(f'Error processing request: {str(e)}')
+            flash(f'Error processing request: {str(e)}', 'danger')
 
     return render_template('event_detail.html', event=event)
+
+@app.route('/event/<int:event_id>/delete', methods=['POST'])
+def delete_event(event_id):
+    try:
+        event = Event.query.get_or_404(event_id)
+
+        # Delete all associated ride offers and requests
+        RideRequest.query.filter_by(event_id=event_id).delete()
+        RideOffer.query.filter_by(event_id=event_id).delete()
+        db.session.delete(event)
+        db.session.commit()
+
+        flash('Event deleted successfully!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        app.logger.error(f'Error deleting event: {str(e)}')
+        flash(f'Error deleting event: {str(e)}', 'danger')
+
+    return redirect(url_for('events'))
 
 @app.route('/matches/<int:event_id>')
 def matches(event_id):
