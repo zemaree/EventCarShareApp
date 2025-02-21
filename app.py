@@ -14,8 +14,8 @@ db = SQLAlchemy(model_class=Base)
 app = Flask(__name__)
 
 # Configuration
-app.secret_key = os.environ.get("SESSION_SECRET", "dev-secret-key")
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///carshare.db")
+app.secret_key = os.environ.get("SESSION_SECRET")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
     "pool_recycle": 300,
     "pool_pre_ping": True,
