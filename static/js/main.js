@@ -29,5 +29,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 form.classList.remove('was-validated')
             })
         })
-    })
+    });
+
+    // Handle anchor scrolling
+    if (window.location.hash) {
+        const hash = window.location.hash;
+        const element = document.querySelector(hash);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+            if (hash === '#create') {
+                const createEventModal = new bootstrap.Modal(document.getElementById('createEventModal'));
+                createEventModal.show();
+            }
+        }
+    }
 });

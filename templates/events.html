@@ -8,13 +8,13 @@
         <h2>Events</h2>
     </div>
     <div class="col text-end">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal" id="create">
             Create Event
         </button>
     </div>
 </div>
 
-<div class="row">
+<div class="row" id="offer">
     {% for event in events %}
     <div class="col-md-6 mb-4">
         <div class="card">
