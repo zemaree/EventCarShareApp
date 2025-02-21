@@ -4,16 +4,16 @@
 
 {% block content %}
 <div class="text-center py-5">
-    <h1 class="display-4">Welcome to EventCarShare 🚗</h1>
-    <p class="lead">Connect with others and share rides to events!</p>
+    <h1 class="display-4">🚗 Benevenuto al portale per le trasferte 🚗</h1>
+    <p class="lead">Connettici con gli altri per condividere un passaggio per le tue trasferte</p>
 
     <div class="row mt-5">
         <div class="col-md-4">
             <a href="{{ url_for('events') }}#create" class="text-decoration-none">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title">Create Events</h5>
-                        <p class="card-text">Organize events and let others join your ride-sharing community.</p>
+                        <h5 class="card-title">Crea Evento</h5>
+                        <p class="card-text">Organizza un Evento e consenti agli altri di offrire passaggi o richiedere uno strappo</p>
                     </div>
                 </div>
             </a>
@@ -22,8 +22,8 @@
             <a href="{{ url_for('events') }}#offer" class="text-decoration-none">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title">Offer Rides</h5>
-                        <p class="card-text">Have empty seats? Offer a ride and help others attend events.</p>
+                        <h5 class="card-title">Offri Passaggio</h5>
+                        <p class="card-text">Hai un posto vuoto? Offri un pasaggio a qualcuno</p>
                     </div>
                 </div>
             </a>
@@ -32,8 +32,8 @@
             <a href="{{ url_for('events') }}#find" class="text-decoration-none">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title">Find Rides</h5>
-                        <p class="card-text">Need a ride? Connect with drivers heading to the same event.</p>
+                        <h5 class="card-title">Trova un passaggio</h5>
+                        <p class="card-text">Cerchi un passaggio? Trova chi può dartene uno.</p>
                     </div>
                 </div>
             </a>
@@ -41,7 +41,7 @@
     </div>
 
     <div class="mt-5">
-        <a href="{{ url_for('events') }}" class="btn btn-lg btn-primary">Browse Events</a>
+        <a href="{{ url_for('events') }}" class="btn btn-lg btn-primary">Eventi</a>
     </div>
 </div>
 {% endblock %}

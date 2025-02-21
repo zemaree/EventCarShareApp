@@ -7,8 +7,8 @@
     <div class="col">
         <h2>{{ event.title }}</h2>
         <p class="lead">
-            <strong>Date:</strong> {{ event.date.strftime('%Y-%m-%d') }}<br>
-            <strong>Destination:</strong> {{ event.destination }}
+            <strong>Data:</strong> {{ event.date.strftime('%Y-%m-%d') }}<br>
+            <strong>Destinazione:</strong> {{ event.destination }}
         </p>
     </div>
 </div>
@@ -17,20 +17,20 @@
     <div class="col-md-6">
         <div class="card mb-4">
             <div class="card-header">
-                <h5 class="card-title mb-0">Offer a Ride</h5>
+                <h5 class="card-title mb-0">Offri un passaggio</h5>
             </div>
             <div class="card-body">
                 <form method="POST">
                     <input type="hidden" name="action" value="offer">
                     <div class="mb-3">
-                        <label for="driver_name" class="form-label">Your Name</label>
+                        <label for="driver_name" class="form-label">Il tuo nome</label>
                         <input type="text" class="form-control" id="driver_name" name="driver_name" required>
                     </div>
                     <div class="mb-3">
-                        <label for="seats" class="form-label">Available Seats</label>
+                        <label for="seats" class="form-label">Posti disponibili</label>
                         <input type="number" class="form-control" id="seats" name="seats" min="1" max="8" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Offer Ride</button>
+                    <button type="submit" class="btn btn-primary">Offri Passaggio</button>
                 </form>
             </div>
         </div>
@@ -39,16 +39,16 @@
     <div class="col-md-6">
         <div class="card mb-4">
             <div class="card-header">
-                <h5 class="card-title mb-0">Request a Ride</h5>
+                <h5 class="card-title mb-0">Richiedi Passaggio</h5>
             </div>
             <div class="card-body">
                 <form method="POST">
                     <input type="hidden" name="action" value="request">
                     <div class="mb-3">
-                        <label for="passenger_name" class="form-label">Your Name</label>
+                        <label for="passenger_name" class="form-label">Il tuo nome</label>
                         <input type="text" class="form-control" id="passenger_name" name="passenger_name" required>
                     </div>
-                    <button type="submit" class="btn btn-secondary">Request Ride</button>
+                    <button type="submit" class="btn btn-secondary">Richiedi Passaggio</button>
                 </form>
             </div>
         </div>
@@ -57,14 +57,14 @@
 
 <div class="row mt-4">
     <div class="col-md-6">
-        <h4>Current Ride Offers</h4>
+        <h4>Passaggi disponibili</h4>
         <div class="list-group">
             {% for offer in event.ride_offers %}
             <div class="list-group-item">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h6 class="mb-1">{{ offer.driver_name }}</h6>
-                        <p class="mb-1">Available Seats: {{ offer.seats_available }}</p>
+                        <p class="mb-1">Posti disponibili: {{ offer.seats_available }}</p>
                     </div>
                     <form method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this ride offer?');">
                         <input type="hidden" name="action" value="delete_offer">
@@ -74,20 +74,20 @@
                 </div>
             </div>
             {% else %}
-            <div class="list-group-item">No ride offers yet</div>
+            <div class="list-group-item">Ancora nessua offerta di passaggio</div>
             {% endfor %}
         </div>
     </div>
 
     <div class="col-md-6">
-        <h4>Current Ride Requests</h4>
+        <h4>Richeste di passaggio</h4>
         <div class="list-group">
             {% for request in event.ride_requests %}
             <div class="list-group-item">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h6 class="mb-1">{{ request.passenger_name }}</h6>
-                        <small>Requested at: {{ request.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+                        <small>Richiesto alle: {{ request.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
                     </div>
                     <form method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this ride request?');">
                         <input type="hidden" name="action" value="delete_request">
@@ -97,7 +97,7 @@
                 </div>
             </div>
             {% else %}
-            <div class="list-group-item">No ride requests yet</div>
+            <div class="list-group-item">Ancora nessuna richiesta di passaggio</div>
             {% endfor %}
         </div>
     </div>
