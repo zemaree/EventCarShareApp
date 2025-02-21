@@ -1,27 +1,39 @@
-/* Minimal custom styles to complement Bootstrap */
+/* Base styles */
+:root {
+    --footer-height: 60px;
+}
+
+body {
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: var(--footer-height);
+}
+
+/* Footer positioning */
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 60px;
-    line-height: 60px;
+    height: var(--footer-height);
+    line-height: calc(var(--footer-height) - 2rem);
 }
 
-body {
-    margin-bottom: 60px;
-    min-height: 100vh;
-    position: relative;
-    padding-bottom: 60px;
-}
-
+/* Card styles */
 .card {
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styles */
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25);
 }
 
 /* Custom styles for the matches page */
@@ -33,7 +45,53 @@ body {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .container {
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Improve card readability on mobile */
+    .card {
+        margin-bottom: 1rem;
+    }
+
+    /* Adjust typography for mobile */
+    h1.display-4 {
+        font-size: 2.5rem;
+    }
+
+    .lead {
+        font-size: 1.1rem;
+    }
+
+    /* Better spacing for mobile forms */
+    .modal-body {
+        padding: 1rem;
+    }
+
+    .form-label {
+        margin-bottom: 0.3rem;
+    }
+
+    /* Improve button touch targets */
+    .btn {
+        padding: 0.5rem 1rem;
+        margin: 0.25rem;
+    }
+
+    /* Navbar adjustments */
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .nav-link {
+        padding: 0.5rem 0;
+    }
+}
+
+/* Tablet and larger screens */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
 }
