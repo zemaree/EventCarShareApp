@@ -96,7 +96,12 @@ body {
     }
 }
 
-/* Header styles */
-header {
-    color: #ff6600; /* Cambia questo colore secondo le tue preferenze */
+/* Titolo styles */
+span.fs-4 {
+    color: #ffffff; /* Cambia questo colore secondo le tue preferenze */
+}
+
+/* Menu styles */
+a.nav-link.px-3 {
+    color: #ffffff; /* Cambia questo colore secondo le tue preferenze */
 }
